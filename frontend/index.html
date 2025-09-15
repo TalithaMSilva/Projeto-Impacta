@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoShop - Cadastro e Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>NeoShop</h2>
+            <div class="tabs">
+                <button class="tab-button active" id="register-tab">Cadastrar</button>
+                <button class="tab-button" id="login-tab">Login</button>
+            </div>
+
+            <div id="register-form" class="form-content active">
+                <h3>Cadastro de Usuário</h3>
+                <form id="registrationForm">
+                    <label for="regFullName">Nome Completo:</label>
+                    <input type="text" id="regFullName" name="fullName" required>
+
+                    <label for="regCpf">CPF (somente números):</label>
+                    <input type="text" id="regCpf" name="cpf" pattern="\d{11}" maxlength="11" required>
+                    <small class="error-message" id="cpf-error"></small>
+
+                    <label for="regBirthDate">Data de Nascimento:</label>
+                    <input type="date" id="regBirthDate" name="birthDate" required>
+
+                    <label for="regPhoneNumber">Celular (DDD + 9 dígitos):</label>
+                    <input type="text" id="regPhoneNumber" name="phoneNumber" pattern="\d{11}" maxlength="11" placeholder="Ex: 11987654321" required>
+                    <small class="error-message" id="phone-error"></small>
+
+                    <label for="regEmail">E-mail:</label>
+                    <input type="email" id="regEmail" name="email" required>
+
+                    <label for="regAddress">Endereço:</label>
+                    <textarea id="regAddress" name="address" required></textarea>
+
+                    <label for="regPassword">Senha:</label>
+                    <input type="password" id="regPassword" name="password" required>
+
+                    <button type="submit">Cadastrar</button>
+                </form>
+                <p id="register-message" class="message"></p>
+            </div>
+
+            <div id="login-form" class="form-content">
+                <h3>Login</h3>
+                <form id="loginForm">
+                    <label for="logEmail">E-mail:</label>
+                    <input type="email" id="logEmail" name="email" required>
+
+                    <label for="logPassword">Senha:</label>
+                    <input type="password" id="logPassword" name="password" required>
+
+                    <button type="submit">Entrar</button>
+                </form>
+                <p id="login-message" class="message"></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

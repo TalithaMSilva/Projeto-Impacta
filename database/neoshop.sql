@@ -1,0 +1,15 @@
+CREATE DATABASE IF NOT EXISTS neoshop;
+
+USE neoshop;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    cpf VARCHAR(11) UNIQUE NOT NULL,
+    birth_date DATE NOT NULL,
+    phone_number VARCHAR(11) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    address TEXT NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
