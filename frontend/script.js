@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loginTab.classList.remove('active');
         registerFormDiv.classList.add('active');
         loginFormDiv.classList.remove('active');
-        registerMessage.textContent = ''; // Limpa mensagens ao alternar
-        loginMessage.textContent = ''; // Limpa mensagens ao alternar
+        registerMessage.textContent = '';
+        loginMessage.textContent = '';
     });
 
     loginTab.addEventListener('click', () => {
@@ -30,14 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
         registerTab.classList.remove('active');
         loginFormDiv.classList.add('active');
         registerFormDiv.classList.remove('active');
-        registerMessage.textContent = ''; // Limpa mensagens ao alternar
-        loginMessage.textContent = ''; // Limpa mensagens ao alternar
+        registerMessage.textContent = '';
+        loginMessage.textContent = '';
     });
 
     // Validação de CPF em tempo real
     cpfInput.addEventListener('input', () => {
-        let cpf = cpfInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-        cpfInput.value = cpf; // Atualiza o campo com apenas números
+        let cpf = cpfInput.value.replace(/\D/g, '');
+        cpfInput.value = cpf;
 
         if (cpf.length === 11) {
             cpfError.textContent = '';
@@ -50,10 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Validação de Telefone em tempo real
     phoneInput.addEventListener('input', () => {
-        let phone = phoneInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-        phoneInput.value = phone; // Atualiza o campo com apenas números
+        let phone = phoneInput.value.replace(/\D/g, '');
+        phoneInput.value = phone;
 
-        // Verifica se tem DDD (2 dígitos) + 9 dígitos
         if (phone.length === 11) {
             phoneError.textContent = '';
         } else if (phone.length > 0) {
@@ -75,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const address = document.getElementById('regAddress').value;
         const password = document.getElementById('regPassword').value;
 
-        // Validação final antes de enviar
         if (cpf.length !== 11 || !/^\d+$/.test(cpf)) {
             cpfError.textContent = 'CPF inválido. Deve conter 11 dígitos numéricos.';
             return;
@@ -99,9 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 registerMessage.className = 'message success';
                 registerMessage.textContent = data.message;
-                registrationForm.reset(); // Limpa o formulário
-                cpfError.textContent = '';
-                phoneError.textContent = '';
+
+                // Salva usuário no localStorage e redireciona para main.html
+                const user = data.user;
+                localStorage.setItem('user', JSON.stringify(user));
+
+                setTimeout(() => {
+                    window.location.href = 'main.html';
+                }, 800);
             } else {
                 registerMessage.className = 'message error';
                 registerMessage.textContent = data.message || 'Erro ao cadastrar. Tente novamente.';
@@ -134,9 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 loginMessage.className = 'message success';
                 loginMessage.textContent = data.message;
-                loginForm.reset(); // Limpa o formulário
-                // Aqui você pode redirecionar o usuário ou armazenar o token de autenticação
-                console.log('Usuário logado:', data.user);
+
+                // Salva usuário completo no localStorage e redireciona para main.html
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                setTimeout(() => {
+                    window.location.href = 'main.html';
+                }, 800);
             } else {
                 loginMessage.className = 'message error';
                 loginMessage.textContent = data.message || 'Erro ao fazer login. Credenciais inválidas.';

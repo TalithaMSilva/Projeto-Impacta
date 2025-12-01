@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoShop - E-commerce</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">NeoShop</div>
+        <div class="user-info">
+            <span id="userNameDisplay"></span>
+            <button id="logoutButton" class="btn btn-outline">Sair</button>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="tabs">
+            <button class="tab-button active" data-tab="tab-cadastro">Cadastro do Usuário</button>
+            <button class="tab-button" data-tab="tab-produtos">Cadastro de Produtos</button>
+            <button class="tab-button" data-tab="tab-carrinho">Carrinho</button>
+        </div>
+
+        <!-- Aba Cadastro -->
+        <section id="tab-cadastro" class="tab-content active">
+            <h2>Dados do Usuário</h2>
+            <form id="userForm" class="form-grid">
+                <input type="hidden" id="userId">
+
+                <div class="form-group">
+                    <label for="userFullName">Nome Completo</label>
+                    <input type="text" id="userFullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userCpf">CPF</label>
+                    <input type="text" id="userCpf" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="userBirthDate">Data de Nascimento</label>
+                    <input type="date" id="userBirthDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userPhoneNumber">Celular (DDD + 9 dígitos)</label>
+                    <input type="text" id="userPhoneNumber" required maxlength="11">
+                </div>
+
+                <div class="form-group">
+                    <label for="userEmail">E-mail</label>
+                    <input type="email" id="userEmail" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="userAddress">Endereço</label>
+                    <textarea id="userAddress" required></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn">Salvar Alterações</button>
+                    <button type="button" id="deleteAccountButton" class="btn btn-danger">Excluir Conta</button>
+                </div>
+            </form>
+            <p id="userMessage" class="message"></p>
+        </section>
+
+        <!-- Aba Produtos -->
+        <section id="tab-produtos" class="tab-content">
+            <div class="section-header">
+                <h2> Produtos</h2>
+                <button id="toggleProductFormButton" class="btn btn-outline">Novo Produto</button>
+            </div>
+
+            <form id="productForm" class="form-grid hidden">
+                <input type="hidden" id="productId">
+
+                <div class="form-group">
+                    <label for="productName">Nome</label>
+                    <input type="text" id="productName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productPrice">Preço</label>
+                    <input type="number" step="0.01" id="productPrice" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="productDescription">Descrição</label>
+                    <textarea id="productDescription"></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="productImageUrl">URL da Imagem</label>
+                    <input type="text" id="productImageUrl">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn">Salvar Produto</button>
+                    <button type="button" id="cancelProductEditButton" class="btn btn-outline">Cancelar</button>
+                </div>
+            </form>
+
+            <p id="productMessage" class="message"></p>
+
+            <div id="productsList" class="cards-container">
+                <!-- Produtos serão inseridos aqui via JS -->
+            </div>
+        </section>
+
+        <!-- Aba Carrinho -->
+        <section id="tab-carrinho" class="tab-content">
+            <h2>Meu Carrinho</h2>
+            <div id="cartItemsContainer">
+                <!-- Itens do carrinho via JS -->
+            </div>
+            <div class="cart-summary">
+                <span>Total: R$ <span id="cartTotal">0,00</span></span>
+                <button id="clearCartButton" class="btn btn-outline">Esvaziar Carrinho</button>
+            </div>
+            <p id="cartMessage" class="message"></p>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
